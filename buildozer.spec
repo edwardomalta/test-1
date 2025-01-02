@@ -1,7 +1,7 @@
 [app]
 
 # (opcional) Para que no se ponga creativo con descargas
-android.skip_update = True
+# android.skip_update = True
 android.accept_sdk_license = True
 #android.sdk_path = /opt/android-sdk
 #android.ndk_path = /opt/android-sdk/ndk/25.2.9519653
@@ -361,7 +361,7 @@ warn_on_root = 1
 # build_dir = ./.buildozer
 
 # (str) Path to build output (i.e. .apk, .ipa) storage
-android.skip_update = True
+#android.skip_update = True
 android.accept_sdk_license = True
 #android.sdk_path = /opt/android-sdk
 #android.ndk_path = /opt/android-sdk/ndk/25.2.9519653# bin_dir = ./bin
