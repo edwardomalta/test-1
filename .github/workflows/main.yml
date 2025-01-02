@@ -24,7 +24,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y zip libffi-dev libssl-dev
         pip install --upgrade pip setuptools wheel
-        pip install buildozer
+        pip install cython buildozer
 
     - name: Build APK (Debug)
       run: |
