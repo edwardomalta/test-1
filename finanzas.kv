@@ -41,7 +41,7 @@
 		spacing: 15
 		orientation: "vertical"
 		Label:
-			text: "Finanzas V 0.1.0"
+			text: "Finanzas"
 			font_size: "40sp"
 			size_hint_y: None
 			height: 60
@@ -49,7 +49,7 @@
 		Label:
 			size_hint_y: None
 			height: 20
-			text: "Hoy XX de XX del XXXX"
+			text: f"Hoy {root.fecha[-1]} de {root.fecha[-2]} del {root.fecha[-3]}"
 		BoxLayout:
 			size_hint_y: None
 			height: 15
@@ -59,7 +59,7 @@
 				text: "$ {}".format(str(root.balance))
 		BoxLayout: 
 			orientation: "vertical"
-			padding: 20
+			padding: 40
 			spacing: 20
 			Button:
 				text: "Registro"
@@ -90,8 +90,9 @@
 			Button:
 				text: "Importar DB"
 				on_release: root.open_popup("importar")
-				#root.importar_db()
 		Button:
+			size_hint_y: None
+			height: "30dp"
 			text: "Volver"
 			on_release:
 				root.manager.current = "menu"

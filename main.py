@@ -164,9 +164,12 @@ class Registro(Screen):
 
 class Menu(Screen):
 	balance = NumericProperty(None)
+	fecha = ListProperty([])
 	
 	def on_enter(self):
 		self.balance = calc_balance_actual()
+		fecha = datetime.datetime.now()
+		self.fecha = (fecha.year, fecha.month, fecha.day)
 		if self.balance is None:
 			Clock.schedule_once(self.show_popup, 0.5)
 
