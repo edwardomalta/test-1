@@ -22,7 +22,14 @@ jobs:
     - name: Install Buildozer
       run: |
         sudo apt-get update
-        sudo apt-get install -y zip libffi-dev libssl-dev
+        # sudo apt-get install -y zip libffi-dev libssl-dev
+        sudo apt-get install -y \
+                    automake \
+                    autoconf \
+                    libtool \
+                    pkg-config \
+                    libffi-dev \
+                    libssl-dev \
         pip install --upgrade pip setuptools wheel
         pip install cython buildozer
 
