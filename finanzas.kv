@@ -199,31 +199,33 @@
     Label:
         text: root.concepto
         font_size: root.tama_stdr
-        size_hint_x: 0.45
+        size_hint_x: 0.30
         #width: "{}dp".format(150*3)
         halign: 'left'
         valign: 'middle'
         text_size: self.size
+        shorten: True
+        shorten_from: 'right'
     Label:
         text: root.ingreso
         font_size: root.tama_stdr
         halign: 'right'
         valign: 'middle'
-        size_hint_x: 0.10
+        size_hint_x: 0.15
         text_size: self.size
     Label:
         text: root.egreso
         font_size: root.tama_stdr
         halign: 'right'
         valign: 'middle'
-        size_hint_x: 0.10
+        size_hint_x: 0.15
         text_size: self.size
     Label:
         text: root.balance
         font_size: root.tama_stdr
         halign: 'right'
         valign: 'middle'
-        size_hint_x: 0.10
+        size_hint_x: 0.15
         text_size: self.size
 
 <Tabla>:
