@@ -176,7 +176,10 @@
     # Usamos BoxLayout horizontal para alinear columnas.
     # Vamos a crear labels para cada columna.
     size_hint_y: None
+    size_hint_x: 1
     height: 30
+    padding: 1
+    spacing: 0.5
     canvas.before:
         Color:
             rgba: self.background_color
@@ -185,30 +188,42 @@
             size: self.size
 
     Label:
-        text: root.fecha
-        size_hint_x: None
-        width: "150dp"
+        text: root.fecha[:10]
+        font_size: root.tama_stdr
+        size_hint_x: 0.25
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.width, None
+        shorten: True
+        shorten_from: 'right'
     Label:
         text: root.concepto
-        size_hint_x: None
-        width: "{}dp".format(150*3)
+        font_size: root.tama_stdr
+        size_hint_x: 0.45
+        #width: "{}dp".format(150*3)
         halign: 'left'
         valign: 'middle'
         text_size: self.size
     Label:
         text: root.ingreso
+        font_size: root.tama_stdr
         halign: 'right'
         valign: 'middle'
+        size_hint_x: 0.10
         text_size: self.size
     Label:
         text: root.egreso
+        font_size: root.tama_stdr
         halign: 'right'
         valign: 'middle'
+        size_hint_x: 0.10
         text_size: self.size
     Label:
         text: root.balance
+        font_size: root.tama_stdr
         halign: 'right'
         valign: 'middle'
+        size_hint_x: 0.10
         text_size: self.size
 
 <Tabla>:

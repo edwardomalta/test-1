@@ -24,6 +24,7 @@ CWD = os.getcwd()
 DB = "data.json"
 
 class CustomRow(BoxLayout):
+	tama_stdr = NumericProperty(14)
 	background_color = ListProperty([0, 0, 0, 1])
 	balance = StringProperty("$ 0.00")
 	egreso = StringProperty("$ 0.00")
