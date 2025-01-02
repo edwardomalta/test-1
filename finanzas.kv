@@ -1,0 +1,249 @@
+
+<Manager>:
+	Menu:
+	Registro:
+	Tabla:
+	Statistics:
+	Config:
+
+<PopupBox>:
+	Image:
+		source: "img/bawagan2.webp"
+
+<BalancePopup>:
+	title: "¿Cual es tu saldo inicial?"
+	size_hint: 0.5, 0.4
+	auto_dismiss: False
+	BoxLayout:
+		padding: 10
+		spacing: 10
+		orientation: "vertical"
+		#Image:
+		#	id: popupcontent
+		#	source: "imgs/bawagan2.webp"
+		Label:
+			id: lbl_error
+			text: ""
+		TextInput:
+			id: txt_saldo_inicial
+			hint_text: "Ingresa tu saldo inicial"
+			multiline: False
+			input_filter: "float" # Esto esta chido evita teclear letras!
+		Button:
+			text: "Aceptar"
+			size_hint_y: None
+			height: 40
+			on_release: root.validar_saldo()
+
+<Menu>:
+	name: "menu"
+	BoxLayout:
+		spacing: 15
+		orientation: "vertical"
+		Label:
+			text: "Finanzas V 0.1.0"
+			font_size: "40sp"
+			size_hint_y: None
+			height: 60
+		
+		Label:
+			size_hint_y: None
+			height: 20
+			text: "Hoy XX de XX del XXXX"
+		BoxLayout:
+			size_hint_y: None
+			height: 15
+			Label:
+				text: "Balance:"
+			Label:
+				text: "$ {}".format(str(root.balance))
+		BoxLayout: 
+			orientation: "vertical"
+			padding: 20
+			spacing: 20
+			Button:
+				text: "Registro"
+				on_release:
+					root.manager.current = "registro"
+			Button:
+				text: "Tabla"
+				on_release:
+					root.manager.current = "tabla"
+			Button:
+				text: "Config"
+				on_release:
+					root.manager.current = "config"
+
+<Config>:
+	name: "config"
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "Respaldar / restaurar DB"
+		BoxLayout:
+			padding: 20
+			spacing: 10
+			Button:
+				text: "Respaldar DB"
+				on_release: root.open_popup("respaldar")
+				#root.respaldar_db()
+			Button:
+				text: "Importar DB"
+				on_release: root.open_popup("importar")
+				#root.importar_db()
+		Button:
+			text: "Volver"
+			on_release:
+				root.manager.current = "menu"
+<FilePopup>:
+	id: popup
+	title: "Selecciona una imagen"
+	content: popupcontent
+	BoxLayout:
+		id: popupcontent
+		orientation: "vertical"
+		FileChooserIconView:
+			id: filechooser
+			path: root.cwd
+			filters: ['*.json']
+		BoxLayout:
+			padding: 5
+			spacing: 5
+			size_hint_y: None
+			height: 40
+			Button:
+				text: "Cancel"
+				on_release:
+					popup.dismiss()
+			Button:
+				text: "Seleccionar"
+				on_release:
+					root.get_file(filechooser.path, filechooser.selection)
+					popup.dismiss()
+
+<Registro>:
+	name: "registro"
+	concepto: concepto
+	cantidad: cantidad
+	BoxLayout:
+		padding: 30
+		spacing: 25
+		orientation: "vertical"
+		BoxLayout:
+			Label:
+				text: "Concepto"
+			TextInput:
+				id: concepto
+		BoxLayout:
+			Label:
+				text: "Cantidad"
+			TextInput:
+				id: cantidad
+		BoxLayout:
+			Label:
+				text: "Gasto"
+			CheckBox:
+				id: type_out
+				group: "tipo"
+				active: True
+		BoxLayout:
+			Label:
+				text: "Ingreso"
+			CheckBox:
+				id: type_in
+				group: "tipo"
+				on_active:
+					root.gasto = False if root.gasto else True
+		BoxLayout:
+			Button:
+				text: "Cancelar"
+				on_release:
+					root.limpiar()
+					root.manager.current="menu"
+			Button:
+				text: "Limpiar"
+				on_release: 
+					root.limpiar()
+			Button:
+				text: "Guardar"
+				on_release:
+					root.guardar()
+					root.limpiar()
+					root.manager.current="menu"
+
+<CustomRow>:
+    # Este widget representa una fila en nuestra "tabla".
+    # Usamos BoxLayout horizontal para alinear columnas.
+    # Vamos a crear labels para cada columna.
+    size_hint_y: None
+    height: 30
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: root.fecha
+        size_hint_x: None
+        width: "150dp"
+    Label:
+        text: root.concepto
+        size_hint_x: None
+        width: "{}dp".format(150*3)
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+    Label:
+        text: root.ingreso
+        halign: 'right'
+        valign: 'middle'
+        text_size: self.size
+    Label:
+        text: root.egreso
+        halign: 'right'
+        valign: 'middle'
+        text_size: self.size
+    Label:
+        text: root.balance
+        halign: 'right'
+        valign: 'middle'
+        text_size: self.size
+
+<Tabla>:
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "Tabla de Movimientos"
+			font_size: 20
+			size_hint_y: None
+			height: 40
+		BoxLayout:
+			size_hint_y: None
+			height: 50
+			Button:
+				text: "Mes"
+				on_release: root.filtrar_por_mes()
+			Button: 
+				text: "Día"
+				on_release: root.filtrar_por_dia()
+
+		RecycleView:
+			id: rv
+			viewclass: 'CustomRow'
+			scroll_type: ['bars', 'content']
+			bar_width: 10
+			RecycleBoxLayout:
+				default_size: None, 30
+				default_size_hint: 1, None
+				size_hint_y: None
+				height: self.minimum_height
+				orientation: 'vertical'
+
+		Button:
+			size_hint_y: None
+			height: "80dp"
+			text: "Volver"
+			on_release:
+				root.manager.current = "menu"
