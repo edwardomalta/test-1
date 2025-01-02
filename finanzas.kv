@@ -63,31 +63,62 @@
 			spacing: 20
 			Button:
 				text: "Registro"
+				font_size: root.f_size
 				on_release:
 					root.manager.current = "registro"
 			Button:
 				text: "Tabla"
+				font_size: root.f_size
 				on_release:
 					root.manager.current = "tabla"
 			Button:
 				text: "Config"
+				font_size: root.f_size
 				on_release:
 					root.manager.current = "config"
 
 <Config>:
 	name: "config"
 	BoxLayout:
+		canvas.before:
+			Color:
+				rgba: 1, .3, .1, 1
+			Rectangle:
+				source: root.IMG_FONDO
+				pos: self.pos
+				size: (self.width, self.width / root.ratio) if self.width / self.height > root.ratio else (self.height * root.ratio, self.height)
 		orientation: "vertical"
 		Label:
 			text: "Respaldar / restaurar DB"
 		BoxLayout:
+			size_hint_y: None
+			height: "150dp"
 			padding: 20
-			spacing: 10
+			spacing: 40
 			Button:
+				canvas.before:
+					Color:
+						rgba: 0, 0, 1, 0.85
+					BoxShadow:
+						pos: self.pos
+						size: self.size
+						offset: 0, -10
+						spread_radius: -20, -20
+						border_radius: 10, 10, 10, 10
+						blur_radius: 80 if self.state == "normal" else 50
 				text: "Respaldar DB"
 				on_release: root.open_popup("respaldar")
-				#root.respaldar_db()
 			Button:
+				canvas.before:
+					Color:
+						rgba: 0, 0, 1, 0.85
+					BoxShadow:
+						pos: self.pos
+						size: self.size
+						offset: 0, -10
+						spread_radius: -20, -20
+						border_radius: 10, 10, 10, 10
+						blur_radius: 80 if self.state == "normal" else 50
 				text: "Importar DB"
 				on_release: root.open_popup("importar")
 		Button:
@@ -131,31 +162,9 @@
 		spacing: 25
 		orientation: "vertical"
 		BoxLayout:
-			Label:
-				text: "Concepto"
-			TextInput:
-				id: concepto
-		BoxLayout:
-			Label:
-				text: "Cantidad"
-			TextInput:
-				id: cantidad
-		BoxLayout:
-			Label:
-				text: "Gasto"
-			CheckBox:
-				id: type_out
-				group: "tipo"
-				active: True
-		BoxLayout:
-			Label:
-				text: "Ingreso"
-			CheckBox:
-				id: type_in
-				group: "tipo"
-				on_active:
-					root.gasto = False if root.gasto else True
-		BoxLayout:
+			size_hint_y: None
+			height: "35dp"
+			spacing: "3dp"
 			Button:
 				text: "Cancelar"
 				on_release:
@@ -171,6 +180,58 @@
 					root.guardar()
 					root.limpiar()
 					root.manager.current="menu"
+		BoxLayout:
+			size_hint_y: None
+			height: "35dp"
+			spacing: "3dp"
+			Label:
+				text: "Concepto"
+				size_hint_x: None
+				width: "80dp"
+			TextInput:
+				id: concepto
+				multiline: False
+		BoxLayout:
+			size_hint_y: None
+			height: "35dp"
+			spacing: "3dp"
+			Label:
+				text: "Cantidad"
+				size_hint_x: None
+				width: "80dp"
+			TextInput:
+				id: cantidad
+				multiline: False
+		BoxLayout:
+			orientation: "vertical"
+			size_hint_y: None
+			height: "120dp"
+			canvas.before:
+				Color:
+					rgba: 0, .2, .3, 1
+				Line: 
+					rounded_rectangle: self.x, self.y, self.width, self.height, 15
+					width: 3
+			Label:
+				text: "Tipo de movimiento:"
+				size_hint_y: None
+				height: "35dp"
+			BoxLayout:
+				Label:
+					text: "Gasto"
+				CheckBox:
+					id: type_out
+					group: "tipo"
+					active: True
+			BoxLayout:
+				Label:
+					text: "Ingreso"
+				CheckBox:
+					id: type_in
+					group: "tipo"
+					on_active:
+						root.gasto = False if root.gasto else True
+		Widget:
 
 <CustomRow>:
     # Este widget representa una fila en nuestra "tabla".
@@ -265,3 +326,16 @@
 			text: "Volver"
 			on_release:
 				root.manager.current = "menu"
+
+<xButton@Button>:
+	canvas.before:
+		Color:
+			rgba: 0, 0, 1, 0.85
+		BoxShadow:
+			pos: self.pos
+			size: self.size
+			offset: 0, -10
+			spread_radius: -20, -20
+			border_radius: 10, 10, 10, 10
+			blur_radius: 80 if self.state == "normal" else 50
+	text: "prueba"

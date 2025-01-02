@@ -8,6 +8,7 @@ from kivy.properties import ObjectProperty, StringProperty, ListProperty, Numeri
 import datetime
 from tinydb import TinyDB, Query
 from kivy.clock import Clock
+from kivy.core.image import Image as CoreImage
 from db_manager import (get_saldo_inicial, 
 						set_saldo_inicial,
 						calc_balance_actual, 
@@ -22,6 +23,8 @@ import os
 CWD = os.getcwd()
 
 DB = "data.json"
+
+MENU_FS = "20sp"
 
 class CustomRow(BoxLayout):
 	tama_stdr = NumericProperty(14)
@@ -61,6 +64,12 @@ class FilePopup(Popup):
 			self.callback(path, file)
 
 class Config(Screen):
+	IMG_FONDO = StringProperty("images/back.webp")
+	def __init__(self, **kwargs):
+		super().__init__(**kwargs)
+		texture = CoreImage(self.IMG_FONDO).texture
+		self.ratio = texture.width / texture.height
+
 	def open_popup(self, modo):
 		if modo == "respaldar":
 			popup = FilePopup(title="Selecciona un lugar para respaldar")
@@ -163,6 +172,7 @@ class Registro(Screen):
 			print(f"Ocurrio un error inesperado: {e}")
 
 class Menu(Screen):
+	f_size = StringProperty(MENU_FS)
 	balance = NumericProperty(None)
 	fecha = ListProperty([])
 	
