@@ -9,6 +9,9 @@ import datetime
 from tinydb import TinyDB, Query
 from kivy.clock import Clock
 from kivy.core.image import Image as CoreImage
+from kivy.utils import platform
+if platform == 'android':
+    from android.permissions import request_permissions, Permission
 from db_manager import (get_saldo_inicial, 
 						set_saldo_inicial,
 						calc_balance_actual, 
@@ -25,6 +28,8 @@ CWD = os.getcwd()
 DB = "data.json"
 
 MENU_FS = "20sp"
+
+PLATFORM = platform
 
 class CustomRow(BoxLayout):
 	tama_stdr = NumericProperty(14)
@@ -69,6 +74,14 @@ class Config(Screen):
 		super().__init__(**kwargs)
 		texture = CoreImage(self.IMG_FONDO).texture
 		self.ratio = texture.width / texture.height
+
+	def solicitar_permisos(self):
+		if PLATFORM  == "android":
+			request_permissions([Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE])
+
+	def on_enter(self):
+		if platform == 'android':
+			self.solicitar_permisos()
 
 	def open_popup(self, modo):
 		if modo == "respaldar":
