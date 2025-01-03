@@ -63,7 +63,12 @@ class Statistics(Screen):
 class FilePopup(Popup):
 	callback = ObjectProperty(None)
 	if platform == "android":
-		cwd = "/sdcard/Download/"
+		from jnius import autoclass
+		Environment = autoclass('android.os.Environment')
+		PythonActivity = autoclass('org.kivy.android.PythonActivity')
+		Context = autoclass('android.content.Context')
+		cwd = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath()
+		print(f"OJO DEBUG: disque descargas esta en: {cwd}")
 	else:
 		cwd = CWD
 	def get_file(self, path, file):
