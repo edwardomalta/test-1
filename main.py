@@ -62,7 +62,10 @@ class Statistics(Screen):
 
 class FilePopup(Popup):
 	callback = ObjectProperty(None)
-	cwd = CWD
+	if platform == "android":
+		cwd = "/sdcard/Download/'"
+	else:
+		cwd = CWD
 	def get_file(self, path, file):
 		print(path, file)
 		if self.callback:
