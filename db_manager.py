@@ -101,8 +101,8 @@ def get_movimientos():
 
 	items = []
 
-	color1 = (0.6, 0.9, 0.9, 1) 	# gris claro
-	color2 = (0.8, 0.8, 0.7, 1)		# gris un poco más oscuro..
+	color1 = (1, 0.3, 0.1, 1) 	# gris claro
+	color2 = (0.8, 0.2, 0.05, 1)		# gris un poco más oscuro..
 
 	for i, reg in enumerate (registros):
 		año, mes, dia, hora, minuto = reg['fecha']
