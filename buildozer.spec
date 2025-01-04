@@ -50,7 +50,7 @@ requirements = python3,kivy,tinydb
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = %(source.dir)s/images/cargando.png
 
 # (str) Icon of the application
 icon.filename = images/finances.png

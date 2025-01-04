@@ -5,10 +5,39 @@
 	Tabla:
 	Statistics:
 	Config:
+	Ctabla:
 
 <PopupBox>:
 	Image:
 		source: "img/bawagan2.webp"
+
+<Ctabla>:
+	name: "cfg_tabla"
+	BoxLayout: 
+		orientation: "vertical"
+		Label:
+			text: "Configurando la tabla"
+		BoxLayout: 
+			orientation: "vertical"
+			RecycleView:
+				id: rv
+				viewclass: 'CustomRow'
+				scroll_type: ['bars', 'content']
+				bar_width: 10
+				RecycleBoxLayout:
+					default_size: None, 30
+					default_size_hint: 1, None
+					size_hint_y: None
+					height: self.minimum_height
+					orientation: 'vertical'
+
+		Button:
+			size_hint_y: None
+			height: "40dp"
+			text: "Volver"
+			font_size: "15sp"
+			on_release:
+				root.manager.current = "config"
 
 <BalancePopup>:
 	title: "¿Cual es tu saldo inicial?"
@@ -121,6 +150,11 @@
 						blur_radius: 80 if self.state == "normal" else 50
 				text: "Importar DB"
 				on_release: root.open_popup("importar")
+		Button: 
+			text: "Config Tabla"
+			on_release: root.manager.current="cfg_tabla"
+			size_hint_y: None
+			height: "30dp"
 		Button:
 			size_hint_y: None
 			height: "30dp"
