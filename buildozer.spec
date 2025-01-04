@@ -20,10 +20,10 @@ package.domain = org.finanzas.com
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas,webp
+source.include_exts = py,png,jpg,kv,atlas,webp,xml,java
 
 # (list) List of inclusions using pattern matching
-#source.include_patterns = assets/*,images/*.webp,images/*.png
+source.include_patterns = assets/*,images/*.webp,images/*.png,raw/*.json,manifest/*.xml,java_src/*.java
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
@@ -50,7 +50,7 @@ requirements = python3,kivy,tinydb
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
-presplash.filename = %(source.dir)s/images/cargando.png
+#presplash.filename = %(source.dir)s/images/cargado.png
 
 # (str) Icon of the application
 icon.filename = images/finances.png
