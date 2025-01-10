@@ -1,271 +1,271 @@
 
 <Manager>:
-	Menu:
-	Registro:
-	Tabla:
-	Statistics:
-	Config:
-	Ctabla:
+    Menu:
+    Registro:
+    Tabla:
+    Statistics:
+    Config:
+    Ctabla:
 
 <PopupBox>:
-	Image:
-		source: "img/bawagan2.webp"
+    Image:
+        source: "img/bawagan2.webp"
 
 <Ctabla>:
-	name: "cfg_tabla"
-	BoxLayout: 
-		orientation: "vertical"
-		Label:
-			text: "Configurando la tabla"
-		BoxLayout: 
-			orientation: "vertical"
-			RecycleView:
-				id: rv
-				viewclass: 'CustomRow'
-				scroll_type: ['bars', 'content']
-				bar_width: 10
-				RecycleBoxLayout:
-					default_size: None, 30
-					default_size_hint: 1, None
-					size_hint_y: None
-					height: self.minimum_height
-					orientation: 'vertical'
+    name: "cfg_tabla"
+    BoxLayout: 
+        orientation: "vertical"
+        Label:
+            text: "Configurando la tabla"
+        BoxLayout: 
+            orientation: "vertical"
+            RecycleView:
+                id: rv
+                viewclass: 'CustomRow'
+                scroll_type: ['bars', 'content']
+                bar_width: 10
+                RecycleBoxLayout:
+                    default_size: None, 30
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
 
-		Button:
-			size_hint_y: None
-			height: "40dp"
-			text: "Volver"
-			font_size: "15sp"
-			on_release:
-				root.manager.current = "config"
+        Button:
+            size_hint_y: None
+            height: "40dp"
+            text: "Volver"
+            font_size: "15sp"
+            on_release:
+                root.manager.current = "config"
 
 <BalancePopup>:
-	title: "¿Cual es tu saldo inicial?"
-	size_hint: 0.5, 0.4
-	auto_dismiss: False
-	BoxLayout:
-		padding: 10
-		spacing: 10
-		orientation: "vertical"
-		#Image:
-		#	id: popupcontent
-		#	source: "imgs/bawagan2.webp"
-		Label:
-			id: lbl_error
-			text: ""
-		TextInput:
-			id: txt_saldo_inicial
-			hint_text: "Ingresa tu saldo inicial"
-			multiline: False
-			input_filter: "float" # Esto esta chido evita teclear letras!
-		Button:
-			text: "Aceptar"
-			size_hint_y: None
-			height: 40
-			on_release: root.validar_saldo()
+    title: "¿Cual es tu saldo inicial?"
+    size_hint: 0.5, 0.4
+    auto_dismiss: False
+    BoxLayout:
+        padding: 10
+        spacing: 10
+        orientation: "vertical"
+        #Image:
+        #   id: popupcontent
+        #   source: "imgs/bawagan2.webp"
+        Label:
+            id: lbl_error
+            text: ""
+        TextInput:
+            id: txt_saldo_inicial
+            hint_text: "Ingresa tu saldo inicial"
+            multiline: False
+            input_filter: "float" # Esto esta chido evita teclear letras!
+        Button:
+            text: "Aceptar"
+            size_hint_y: None
+            height: 40
+            on_release: root.validar_saldo()
 
 <Menu>:
-	name: "menu"
-	BoxLayout:
-		spacing: 15
-		orientation: "vertical"
-		Label:
-			text: "Finanzas"
-			font_size: "40sp"
-			size_hint_y: None
-			height: 60
-		
-		Label:
-			size_hint_y: None
-			height: 20
-			text: f"Hoy {root.fecha[-1]} de {root.fecha[-2]} del {root.fecha[-3]}"
-		BoxLayout:
-			size_hint_y: None
-			height: 15
-			Label:
-				text: "Balance:"
-			Label:
-				text: "$ {}".format(str(root.balance))
-		BoxLayout: 
-			orientation: "vertical"
-			padding: 40
-			spacing: 20
-			Button:
-				text: "Registro"
-				font_size: root.f_size
-				on_release:
-					root.manager.current = "registro"
-			Button:
-				text: "Tabla"
-				font_size: root.f_size
-				on_release:
-					root.manager.current = "tabla"
-			Button:
-				text: "Config"
-				font_size: root.f_size
-				on_release:
-					root.manager.current = "config"
+    name: "menu"
+    BoxLayout:
+        spacing: 15
+        orientation: "vertical"
+        Label:
+            text: "Finanzas"
+            font_size: "40sp"
+            size_hint_y: None
+            height: 60
+        
+        Label:
+            size_hint_y: None
+            height: 20
+            text: f"Hoy {root.fecha[-1]} de {root.fecha[-2]} del {root.fecha[-3]}"
+        BoxLayout:
+            size_hint_y: None
+            height: 15
+            Label:
+                text: "Balance:"
+            Label:
+                text: "$ {}".format(str(root.balance))
+        BoxLayout: 
+            orientation: "vertical"
+            padding: 40
+            spacing: 20
+            Button:
+                text: "Registro"
+                font_size: root.f_size
+                on_release:
+                    root.manager.current = "registro"
+            Button:
+                text: "Tabla"
+                font_size: root.f_size
+                on_release:
+                    root.manager.current = "tabla"
+            Button:
+                text: "Config"
+                font_size: root.f_size
+                on_release:
+                    root.manager.current = "config"
 
 <Config>:
-	name: "config"
-	BoxLayout:
-		canvas.before:
-			Color:
-				rgba: 1, .3, .1, 1
-			Rectangle:
-				source: root.IMG_FONDO
-				pos: self.pos
-				size: (self.width, self.width / root.ratio) if self.width / self.height > root.ratio else (self.height * root.ratio, self.height)
-		orientation: "vertical"
-		Label:
-			text: "Respaldar / restaurar DB"
-		BoxLayout:
-			size_hint_y: None
-			height: "150dp"
-			padding: 20
-			spacing: 40
-			Button:
-				canvas.before:
-					Color:
-						rgba: 0, 0, 1, 0.85
-					BoxShadow:
-						pos: self.pos
-						size: self.size
-						offset: 0, -10
-						spread_radius: -20, -20
-						border_radius: 10, 10, 10, 10
-						blur_radius: 80 if self.state == "normal" else 50
-				text: "Respaldar DB"
-				on_release: root.open_popup("respaldar")
-			Button:
-				canvas.before:
-					Color:
-						rgba: 0, 0, 1, 0.85
-					BoxShadow:
-						pos: self.pos
-						size: self.size
-						offset: 0, -10
-						spread_radius: -20, -20
-						border_radius: 10, 10, 10, 10
-						blur_radius: 80 if self.state == "normal" else 50
-				text: "Importar DB"
-				on_release: root.open_popup("importar")
-		Button: 
-			text: "Config Tabla"
-			on_release: root.manager.current="cfg_tabla"
-			size_hint_y: None
-			height: "30dp"
-		Button:
-			size_hint_y: None
-			height: "30dp"
-			text: "Volver"
-			on_release:
-				root.manager.current = "menu"
+    name: "config"
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: 1, .3, .1, 1
+            Rectangle:
+                source: root.IMG_FONDO
+                pos: self.pos
+                size: (self.width, self.width / root.ratio) if self.width / self.height > root.ratio else (self.height * root.ratio, self.height)
+        orientation: "vertical"
+        Label:
+            text: "Respaldar / restaurar DB"
+        BoxLayout:
+            size_hint_y: None
+            height: "150dp"
+            padding: 20
+            spacing: 40
+            Button:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 1, 0.85
+                    BoxShadow:
+                        pos: self.pos
+                        size: self.size
+                        offset: 0, -10
+                        spread_radius: -20, -20
+                        border_radius: 10, 10, 10, 10
+                        blur_radius: 80 if self.state == "normal" else 50
+                text: "Respaldar DB"
+                on_release: root.open_popup("respaldar")
+            Button:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 1, 0.85
+                    BoxShadow:
+                        pos: self.pos
+                        size: self.size
+                        offset: 0, -10
+                        spread_radius: -20, -20
+                        border_radius: 10, 10, 10, 10
+                        blur_radius: 80 if self.state == "normal" else 50
+                text: "Importar DB"
+                on_release: root.open_popup("importar")
+        Button: 
+            text: "Config Tabla"
+            on_release: root.manager.current="cfg_tabla"
+            size_hint_y: None
+            height: "30dp"
+        Button:
+            size_hint_y: None
+            height: "30dp"
+            text: "Volver"
+            on_release:
+                root.manager.current = "menu"
 <FilePopup>:
-	id: popup
-	title: "Selecciona una imagen"
-	content: popupcontent
-	BoxLayout:
-		id: popupcontent
-		orientation: "vertical"
-		FileChooserIconView:
-			id: filechooser
-			path: root.cwd
-			filters: ['*.json']
-		BoxLayout:
-			padding: 5
-			spacing: 5
-			size_hint_y: None
-			height: 40
-			Button:
-				text: "Cancel"
-				on_release:
-					popup.dismiss()
-			Button:
-				text: "Seleccionar"
-				on_release:
-					root.get_file(filechooser.path, filechooser.selection)
-					popup.dismiss()
+    id: popup
+    title: "Selecciona una imagen"
+    content: popupcontent
+    BoxLayout:
+        id: popupcontent
+        orientation: "vertical"
+        FileChooserIconView:
+            id: filechooser
+            path: root.cwd
+            filters: ['*.json']
+        BoxLayout:
+            padding: 5
+            spacing: 5
+            size_hint_y: None
+            height: 40
+            Button:
+                text: "Cancel"
+                on_release:
+                    popup.dismiss()
+            Button:
+                text: "Seleccionar"
+                on_release:
+                    root.get_file(filechooser.path, filechooser.selection)
+                    popup.dismiss()
 
 <Registro>:
-	name: "registro"
-	concepto: concepto
-	cantidad: cantidad
-	BoxLayout:
-		padding: 30
-		spacing: 25
-		orientation: "vertical"
-		BoxLayout:
-			size_hint_y: None
-			height: "35dp"
-			spacing: "3dp"
-			Button:
-				text: "Cancelar"
-				on_release:
-					root.limpiar()
-					root.manager.current="menu"
-			Button:
-				text: "Limpiar"
-				on_release: 
-					root.limpiar()
-			Button:
-				text: "Guardar"
-				on_release:
-					root.guardar()
-					root.limpiar()
-					root.manager.current="menu"
-		BoxLayout:
-			size_hint_y: None
-			height: "35dp"
-			spacing: "3dp"
-			Label:
-				text: "Concepto"
-				size_hint_x: None
-				width: "80dp"
-			TextInput:
-				id: concepto
-				multiline: False
-		BoxLayout:
-			size_hint_y: None
-			height: "35dp"
-			spacing: "3dp"
-			Label:
-				text: "Cantidad"
-				size_hint_x: None
-				width: "80dp"
-			TextInput:
-				id: cantidad
-				multiline: False
-		BoxLayout:
-			orientation: "vertical"
-			size_hint_y: None
-			height: "120dp"
-			canvas.before:
-				Color:
-					rgba: 0, .2, .3, 1
-				Line: 
-					rounded_rectangle: self.x, self.y, self.width, self.height, 15
-					width: 3
-			Label:
-				text: "Tipo de movimiento:"
-				size_hint_y: None
-				height: "35dp"
-			BoxLayout:
-				Label:
-					text: "Gasto"
-				CheckBox:
-					id: type_out
-					group: "tipo"
-					active: True
-			BoxLayout:
-				Label:
-					text: "Ingreso"
-				CheckBox:
-					id: type_in
-					group: "tipo"
-					on_active:
-						root.gasto = False if root.gasto else True
-		Widget:
+    name: "registro"
+    concepto: concepto
+    cantidad: cantidad
+    BoxLayout:
+        padding: 30
+        spacing: 25
+        orientation: "vertical"
+        BoxLayout:
+            size_hint_y: None
+            height: "35dp"
+            spacing: "3dp"
+            Button:
+                text: "Cancelar"
+                on_release:
+                    root.limpiar()
+                    root.manager.current="menu"
+            Button:
+                text: "Limpiar"
+                on_release: 
+                    root.limpiar()
+            Button:
+                text: "Guardar"
+                on_release:
+                    root.guardar()
+                    root.limpiar()
+                    root.manager.current="menu"
+        BoxLayout:
+            size_hint_y: None
+            height: "35dp"
+            spacing: "3dp"
+            Label:
+                text: "Concepto"
+                size_hint_x: None
+                width: "80dp"
+            TextInput:
+                id: concepto
+                multiline: False
+        BoxLayout:
+            size_hint_y: None
+            height: "35dp"
+            spacing: "3dp"
+            Label:
+                text: "Cantidad"
+                size_hint_x: None
+                width: "80dp"
+            TextInput:
+                id: cantidad
+                multiline: False
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: "120dp"
+            canvas.before:
+                Color:
+                    rgba: 0, .2, .3, 1
+                Line: 
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 15
+                    width: 3
+            Label:
+                text: "Tipo de movimiento:"
+                size_hint_y: None
+                height: "35dp"
+            BoxLayout:
+                Label:
+                    text: "Gasto"
+                CheckBox:
+                    id: type_out
+                    group: "tipo"
+                    active: True
+            BoxLayout:
+                Label:
+                    text: "Ingreso"
+                CheckBox:
+                    id: type_in
+                    group: "tipo"
+                    on_active:
+                        root.gasto = False if root.gasto else True
+        Widget:
 
 <CustomRow>:
     # Este widget representa una fila en nuestra "tabla".
@@ -325,51 +325,61 @@
         text_size: self.size
 
 <Tabla>:
-	BoxLayout:
-		orientation: "vertical"
-		Label:
-			text: "Tabla de Movimientos"
-			font_size: 20
-			size_hint_y: None
-			height: 40
-		BoxLayout:
-			size_hint_y: None
-			height: 50
-			Button:
-				text: "Mes"
-				on_release: root.filtrar_por_mes()
-			Button: 
-				text: "Día"
-				on_release: root.filtrar_por_dia()
+    ingresos_totales: 1000
+    gastos_totales: 500
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Tabla de Movimientos"
+            font_size: 20
+            size_hint_y: None
+            height: 40
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            Button:
+                text: "Mes"
+                on_release: root.filtrar_por_mes()
+            Button: 
+                text: "Día"
+                on_release: root.filtrar_por_dia()
 
-		RecycleView:
-			id: rv
-			viewclass: 'CustomRow'
-			scroll_type: ['bars', 'content']
-			bar_width: 10
-			RecycleBoxLayout:
-				default_size: None, 30
-				default_size_hint: 1, None
-				size_hint_y: None
-				height: self.minimum_height
-				orientation: 'vertical'
+        RecycleView:
+            id: rv
+            viewclass: 'CustomRow'
+            scroll_type: ['bars', 'content']
+            bar_width: 10
+            RecycleBoxLayout:
+                default_size: None, 30
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: "100dp"
+            Widget:
+            Label:
+                text: f"Ingresos: ${root.ingresos_totales}"
+            Label:
+                text: f"Gastos: ${root.gastos_totales}"
 
-		Button:
-			size_hint_y: None
-			height: "80dp"
-			text: "Volver"
-			on_release:
-				root.manager.current = "menu"
+        Button:
+            size_hint_y: None
+            height: "80dp"
+            text: "Volver"
+            on_release:
+                root.manager.current = "menu"
 
 <xButton@Button>:
-	canvas.before:
-		Color:
-			rgba: 0, 0, 1, 0.85
-		BoxShadow:
-			pos: self.pos
-			size: self.size
-			offset: 0, -10
-			spread_radius: -20, -20
-			border_radius: 10, 10, 10, 10
-			blur_radius: 80 if self.state == "normal" else 50
-	text: "prueba"
+    canvas.before:
+        Color:
+            rgba: 0, 0, 1, 0.85
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+            offset: 0, -10
+            spread_radius: -20, -20
+            border_radius: 10, 10, 10, 10
+            blur_radius: 80 if self.state == "normal" else 50
+    text: "prueba"
