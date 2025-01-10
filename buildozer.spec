@@ -173,7 +173,9 @@ android.add_src = java_src/
 #android.add_aars =
 
 # (list) Gradle dependencies to add
-android.gradle_dependencies = com.airbnb.android:lottie:3.4.0
+android.gradle_dependencies = \
+    com.airbnb.android:lottie:3.4.0, \
+    androidx.appcompat:appcompat:1.6.1
 
 # (bool) Enable AndroidX support. Enable when 'android.gradle_dependencies'
 # contains an 'androidx' package, or any package from Kotlin source.
